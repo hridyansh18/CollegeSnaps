@@ -1,0 +1,214 @@
+.gallery {
+
+  width: 100%;
+
+  padding:
+  100px 0;
+
+  overflow: hidden;
+
+}
+
+/* Title */
+.gallery-title {
+
+  text-align: center;
+
+  font-size:
+  55px;
+
+  font-weight:
+  900;
+
+  margin-bottom:
+  50px;
+
+  color: white;
+
+}
+
+/* Slider */
+.gallery-slider {
+
+  display: flex;
+
+  gap: 25px;
+
+  overflow-x: auto;
+
+  padding:
+  0 30px;
+
+  scroll-behavior:
+  smooth;
+
+}
+
+/* Image */
+.gallery-image {
+
+  min-width: 320px;
+
+  height: 420px;
+
+  object-fit: cover;
+
+  border-radius:
+  30px;
+
+  cursor:
+  pointer;
+
+  transition:
+  0.4s;
+
+  border:
+  1px solid rgba(255,255,255,0.1);
+
+}
+
+/* Hover */
+.gallery-image:hover {
+
+  transform:
+  scale(1.04);
+
+  box-shadow:
+  0 0 40px rgba(139,92,246,0.35);
+
+}
+
+/* Fullscreen */
+.fullscreen {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+  rgba(0,0,0,0.95);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  z-index: 999;
+
+}
+
+/* Fullscreen Image */
+.fullscreen-image {
+
+  max-width: 95vw;
+
+  max-height: 95vh;
+
+  border-radius:
+  30px;
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px) {
+
+  /* Hero */
+  .hero-title {
+
+    font-size:
+    42px !important;
+
+  }
+
+  .hero-desc {
+
+    font-size:
+    16px !important;
+
+  }
+
+  .hero-buttons {
+
+    flex-direction:
+    column;
+
+    width: 100%;
+
+  }
+
+  .hero-btn,
+  .hero-btn-outline {
+
+    width: 100%;
+
+    text-align:
+    center;
+
+  }
+
+  /* Navbar */
+  .navbar {
+
+    padding:
+    18px 20px;
+
+  }
+
+  .navbar-logo {
+
+    font-size:
+    24px;
+
+  }
+
+  /* Titles */
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    38px !important;
+
+  }
+
+  /* Stats */
+  .stats-section {
+
+    grid-template-columns:
+    1fr !important;
+
+  }
+
+  /* Footer */
+  .footer-logo {
+
+    font-size:
+    32px;
+
+  }
+
+}
+
+@media(max-width:500px) {
+
+  .hero-title {
+
+    font-size:
+    34px !important;
+
+  }
+
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    30px !important;
+
+  }
+
+}

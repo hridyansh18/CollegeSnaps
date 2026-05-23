@@ -1,0 +1,87 @@
+/* Reset */
+* {
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing:
+  border-box;
+
+  scrollbar-width:
+  none;
+
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+/* Body */
+body {
+
+  background:
+  linear-gradient(
+    to bottom,
+    #000000,
+    #050816,
+    #0f172a
+  );
+
+  color: white;
+
+  font-family:
+  Arial, sans-serif;
+
+  overflow-x:
+  hidden;
+
+}
+
+/* Smooth Scroll */
+html {
+
+  scroll-behavior:
+  smooth;
+
+}
+
+/* Images */
+img {
+
+  max-width:
+  100%;
+
+  display:
+  block;
+
+}
+
+/* Buttons */
+button {
+
+  transition:
+  0.3s ease;
+
+}
+
+/* Links */
+a {
+
+  text-decoration:
+  none;
+
+}
+
+/* Selection */
+::selection {
+
+  background:
+  #8b5cf6;
+
+  color:
+  white;
+
+}

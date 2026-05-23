@@ -1,0 +1,356 @@
+.album-page {
+
+  padding:
+  120px 30px;
+
+}
+
+/* Title */
+.album-title {
+
+  text-align:
+  center;
+
+  font-size:
+  60px;
+
+  font-weight:
+  900;
+
+  margin-bottom:
+  60px;
+
+  background:
+  linear-gradient(
+    to right,
+    #ffffff,
+    #ffffff
+  );
+
+  -webkit-background-clip:
+  text;
+
+  background-clip:
+  text;
+
+  -webkit-text-fill-color:
+  transparent;
+
+}
+
+/* Grid */
+.album-grid {
+
+  display: grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(280px,1fr));
+
+  gap: 30px;
+
+}
+
+/* Card */
+.album-card {
+
+  position: relative;
+
+  background:
+  rgba(255,255,255,0.06);
+
+  border:
+  1px solid rgba(255,255,255,0.1);
+
+  border-radius:
+  30px;
+
+  overflow:
+  hidden;
+
+  backdrop-filter:
+  blur(20px);
+
+  transition:
+  0.3s;
+
+}
+
+.album-card:hover {
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 0 40px rgba(139,92,246,0.3);
+
+}
+
+/* Image */
+.album-image {
+
+  width: 100%;
+
+  height: 340px;
+
+  object-fit:
+  cover;
+
+  cursor:
+  pointer;
+
+}
+
+/* Pinterest Style Overlay */
+.album-actions {
+
+  position: absolute;
+
+  top: 15px;
+
+  right: 15px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  opacity: 0;
+
+  transition:
+  0.3s;
+
+}
+
+/* Show on Hover */
+.album-card:hover
+.album-actions {
+
+  opacity: 1;
+
+}
+
+/* Download Icon */
+.download-btn {
+
+  width: 50px;
+
+  height: 50px;
+
+  border: none;
+
+  border-radius:
+  50%;
+
+  background:
+  rgba(255,255,255,0.15);
+
+  backdrop-filter:
+  blur(12px);
+
+  color: white;
+
+  font-size:
+  22px;
+
+  cursor:
+  pointer;
+
+  transition:
+  0.3s;
+
+}
+
+.download-btn:hover {
+
+  transform:
+  scale(1.1);
+
+  background:
+  linear-gradient(
+    to right,
+    #8b5cf6,
+    #ec4899
+  );
+
+}
+
+/* Delete Icon */
+.delete-btn {
+
+  width: 50px;
+
+  height: 50px;
+
+  border: none;
+
+  border-radius:
+  50%;
+
+  background:
+  rgba(239,68,68,0.2);
+
+  backdrop-filter:
+  blur(12px);
+
+  color: white;
+
+  font-size:
+  22px;
+
+  cursor:
+  pointer;
+
+  transition:
+  0.3s;
+
+}
+
+.delete-btn:hover {
+
+  transform:
+  scale(1.1);
+
+  background:
+  #ef4444;
+
+}
+
+/* Fullscreen */
+.fullscreen {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+  rgba(0,0,0,0.95);
+
+  display: flex;
+
+  align-items:
+  center;
+
+  justify-content:
+  center;
+
+  z-index: 999;
+
+}
+
+/* Fullscreen Image */
+.fullscreen-image {
+
+  max-width:
+  95vw;
+
+  max-height:
+  95vh;
+
+  border-radius:
+  30px;
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px) {
+
+  /* Hero */
+  .hero-title {
+
+    font-size:
+    42px !important;
+
+  }
+
+  .hero-desc {
+
+    font-size:
+    16px !important;
+
+  }
+
+  .hero-buttons {
+
+    flex-direction:
+    column;
+
+    width: 100%;
+
+  }
+
+  .hero-btn,
+  .hero-btn-outline {
+
+    width: 100%;
+
+    text-align:
+    center;
+
+  }
+
+  /* Navbar */
+  .navbar {
+
+    padding:
+    18px 20px;
+
+  }
+
+  .navbar-logo {
+
+    font-size:
+    24px;
+
+  }
+
+  /* Titles */
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    38px !important;
+
+  }
+
+  /* Stats */
+  .stats-section {
+
+    grid-template-columns:
+    1fr !important;
+
+  }
+
+  /* Footer */
+  .footer-logo {
+
+    font-size:
+    32px;
+
+  }
+
+}
+
+@media(max-width:500px) {
+
+  .hero-title {
+
+    font-size:
+    34px !important;
+
+  }
+
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    30px !important;
+
+  }
+
+}

@@ -1,0 +1,536 @@
+.navbar {
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 20px 40px;
+
+  background:
+  rgba(0,0,0,0.4);
+
+  backdrop-filter:
+  blur(20px);
+
+  border-bottom:
+  1px solid rgba(255,255,255,0.1);
+
+  z-index: 999;
+
+}
+
+/* Logo */
+.navbar-logo {
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  color: white;
+
+}
+
+/* Desktop Links */
+.navbar-links {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+}
+
+/* Explore */
+.explore-btn {
+
+  background:
+  linear-gradient(
+    to right,
+    #8b5cf6,
+    #ec4899
+  );
+
+  color: white;
+
+  padding:
+  12px 24px;
+
+  border-radius:
+  999px;
+
+  text-decoration:
+  none;
+
+  font-weight:
+  600;
+
+  transition:
+  0.3s;
+
+}
+
+.explore-btn:hover {
+
+  transform:
+  scale(1.05);
+
+}
+
+/* User */
+.user-box {
+
+  background:
+  rgba(255,255,255,0.08);
+
+  border:
+  1px solid rgba(255,255,255,0.1);
+
+  padding:
+  10px 18px;
+
+  border-radius:
+  999px;
+
+  color:
+  #d1d5db;
+
+}
+
+/* Login */
+.login-btn {
+
+  border:
+  1px solid white;
+
+  padding:
+  12px 24px;
+
+  border-radius:
+  999px;
+
+  text-decoration:
+  none;
+
+  color:
+  white;
+
+  transition:
+  0.3s;
+
+}
+
+.login-btn:hover {
+
+  background:
+  white;
+
+  color:
+  black;
+
+}
+
+/* Logout */
+.logout-btn {
+
+  border:
+  1px solid #ef4444;
+
+  background:
+  transparent;
+
+  color:
+  #ef4444;
+
+  padding:
+  12px 24px;
+
+  border-radius:
+  999px;
+
+  cursor:
+  pointer;
+
+  transition:
+  0.3s;
+
+}
+
+.logout-btn:hover {
+
+  background:
+  #ef4444;
+
+  color:
+  white;
+
+}
+
+/* Mobile Button */
+.menu-btn {
+
+  display: none;
+
+  background:
+  transparent;
+
+  border: none;
+
+  color: white;
+
+  font-size: 30px;
+
+  cursor:
+  pointer;
+
+}
+
+/* Mobile Menu */
+.mobile-menu {
+
+  position: fixed;
+
+  top: 0;
+
+  right: 0;
+
+  width: 260px;
+
+  height: 100vh;
+
+  background:
+  rgba(0,0,0,0.95);
+
+  backdrop-filter:
+  blur(20px);
+
+  padding:
+  100px 30px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 30px;
+
+  z-index: 998;
+
+}
+
+.mobile-menu a,
+.mobile-menu button {
+
+  color: white;
+
+  background: none;
+
+  border: none;
+
+  font-size: 20px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+}
+
+.mobile-user {
+
+  color:
+  #9ca3af;
+
+  word-break:
+  break-word;
+
+}
+
+/* Responsive */
+@media(max-width:768px) {
+
+  .navbar-links {
+
+    display: none;
+
+  }
+
+  .menu-btn {
+
+    display: block;
+
+  }
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px) {
+
+  /* Hero */
+  .hero-title {
+
+    font-size:
+    42px !important;
+
+  }
+
+  .hero-desc {
+
+    font-size:
+    16px !important;
+
+  }
+
+  .hero-buttons {
+
+    flex-direction:
+    column;
+
+    width: 100%;
+
+  }
+
+  .hero-btn,
+  .hero-btn-outline {
+
+    width: 100%;
+
+    text-align:
+    center;
+
+  }
+
+  /* Navbar */
+  .navbar {
+
+    padding:
+    18px 20px;
+
+  }
+
+  .navbar-logo {
+
+    font-size:
+    24px;
+
+  }
+
+  /* Titles */
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    38px !important;
+
+  }
+
+  /* Stats */
+  .stats-section {
+
+    grid-template-columns:
+    1fr !important;
+
+  }
+
+  /* Footer */
+  .footer-logo {
+
+    font-size:
+    32px;
+
+  }
+
+}
+
+@media(max-width:500px) {
+
+  .hero-title {
+
+    font-size:
+    34px !important;
+
+  }
+
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    30px !important;
+
+  }
+
+}
+
+/* User Box */
+.user-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  background:
+  rgba(255,255,255,0.08);
+
+  border:
+  1px solid rgba(255,255,255,0.1);
+
+  padding:
+  8px 14px;
+
+  border-radius:
+  999px;
+
+}
+
+/* Profile Pic */
+.user-pic {
+
+  width: 45px;
+
+  height: 45px;
+
+  border-radius:
+  50%;
+
+  object-fit:
+  cover;
+
+}
+
+/* User Info */
+.user-info h4 {
+
+  font-size:
+  14px;
+
+  color:
+  white;
+
+}
+
+.user-info p {
+
+  font-size:
+  12px;
+
+  color:
+  #9ca3af;
+
+}
+
+/* Mobile User */
+.mobile-user-box {
+
+  margin-top:
+  20px;
+
+  text-align:
+  center;
+
+}
+
+.mobile-user-pic {
+
+  width: 80px;
+
+  height: 80px;
+
+  border-radius:
+  50%;
+
+  object-fit:
+  cover;
+
+  margin-bottom:
+  10px;
+
+}
+
+/* =========================
+   MOBILE NAVBAR
+========================= */
+
+@media(max-width:768px) {
+
+  .navbar {
+
+    padding:
+    15px 18px;
+
+  }
+
+  .navbar-logo {
+
+    font-size:
+    24px;
+
+  }
+
+  .navbar-links {
+
+    display: none;
+
+  }
+
+  .menu-btn {
+
+    display: block;
+
+  }
+
+  .mobile-menu {
+
+    width: 100%;
+
+    padding:
+    100px 30px;
+
+    align-items:
+    center;
+
+    text-align:
+    center;
+
+  }
+
+  .mobile-menu a,
+  .mobile-menu button {
+
+    font-size:
+    22px;
+
+  }
+
+  .mobile-user-box {
+
+    margin-top:
+    30px;
+
+  }
+
+  .mobile-user-pic {
+
+    width: 90px;
+
+    height: 90px;
+
+  }
+
+}

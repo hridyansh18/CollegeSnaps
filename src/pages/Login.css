@@ -1,0 +1,267 @@
+.login-page {
+
+  min-height:
+  100vh;
+
+  display: flex;
+
+  align-items:
+  center;
+
+  justify-content:
+  center;
+
+  padding:
+  20px;
+
+}
+
+/* Card */
+.login-card {
+
+  width: 100%;
+
+  max-width:
+  450px;
+
+  background:
+  rgba(255,255,255,0.06);
+
+  border:
+  1px solid rgba(255,255,255,0.1);
+
+  border-radius:
+  35px;
+
+  padding:
+  50px 35px;
+
+  text-align:
+  center;
+
+  backdrop-filter:
+  blur(20px);
+
+  box-shadow:
+  0 0 40px rgba(139,92,246,0.2);
+
+}
+
+/* Title */
+.login-title {
+
+  font-size:
+  48px;
+
+  font-weight:
+  900;
+
+  line-height:
+  1.3;
+
+}
+
+/* Welcome */
+.welcome-text {
+
+  color:
+  white;
+
+}
+
+/* CollegeSnaps */
+.college-text {
+
+  background:
+  linear-gradient(
+    to right,
+    #60a5fa,
+    #22d3ee
+  );
+
+  -webkit-background-clip:
+  text;
+
+  background-clip:
+  text;
+
+  -webkit-text-fill-color:
+  transparent;
+
+}
+
+/* Camera */
+.camera-icon {
+
+  color:
+  white;
+
+}
+
+/* Text */
+.login-text {
+
+  margin-top:
+  20px;
+
+  color:
+  #9ca3af;
+
+  line-height:
+  1.7;
+
+  font-size:
+  18px;
+
+}
+
+/* Google Button */
+.google-btn {
+
+  width: 100%;
+
+  margin-top:
+  40px;
+
+  padding:
+  18px;
+
+  border:
+  1px solid #dadce0;
+
+  border-radius:
+  999px;
+
+  background:
+  white;
+
+  color:
+  #3c4043;
+
+  font-size:
+  18px;
+
+  font-weight:
+  600;
+
+  cursor:
+  pointer;
+
+  transition:
+  0.3s;
+
+}
+
+/* Hover */
+.google-btn:hover {
+
+  background:
+  #f8f9fa;
+
+  transform:
+  scale(1.02);
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px) {
+
+  /* Hero */
+  .hero-title {
+
+    font-size:
+    42px !important;
+
+  }
+
+  .hero-desc {
+
+    font-size:
+    16px !important;
+
+  }
+
+  .hero-buttons {
+
+    flex-direction:
+    column;
+
+    width: 100%;
+
+  }
+
+  .hero-btn,
+  .hero-btn-outline {
+
+    width: 100%;
+
+    text-align:
+    center;
+
+  }
+
+  /* Navbar */
+  .navbar {
+
+    padding:
+    18px 20px;
+
+  }
+
+  .navbar-logo {
+
+    font-size:
+    24px;
+
+  }
+
+  /* Titles */
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    38px !important;
+
+  }
+
+  /* Stats */
+  .stats-section {
+
+    grid-template-columns:
+    1fr !important;
+
+  }
+
+  /* Footer */
+  .footer-logo {
+
+    font-size:
+    32px;
+
+  }
+
+}
+
+@media(max-width:500px) {
+
+  .hero-title {
+
+    font-size:
+    34px !important;
+
+  }
+
+  .album-title,
+  .gallery-title,
+  .quotes-title {
+
+    font-size:
+    30px !important;
+
+  }
+
+}

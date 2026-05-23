@@ -1,0 +1,259 @@
+.footer {
+
+  width: 100%;
+
+  padding:
+  80px 20px;
+
+  text-align:
+  center;
+
+  border-top:
+  1px solid rgba(255,255,255,0.1);
+
+  background:
+  rgba(255,255,255,0.03);
+
+  backdrop-filter:
+  blur(20px);
+
+  margin-top:
+  100px;
+
+}
+
+/* Logo */
+.footer-logo {
+
+  font-size:
+  42px;
+
+  font-weight:
+  900;
+
+  background:
+  linear-gradient(
+    to right,
+    #8b5cf6,
+    #ec4899
+  );
+
+  -webkit-background-clip:
+  text;
+
+  background-clip:
+  text;
+
+  -webkit-text-fill-color:
+  transparent;
+
+}
+
+/* Camera */
+.footer-logo span {
+
+  -webkit-text-fill-color:
+  white;
+
+}
+
+/* Text */
+.footer-text {
+
+  max-width:
+  700px;
+
+  margin:
+  25px auto;
+
+  color:
+  #9ca3af;
+
+  line-height:
+  1.8;
+
+  font-size:
+  18px;
+
+}
+
+/* Socials */
+.footer-socials {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  margin-top:
+  40px;
+
+}
+
+/* Button */
+.social-btn {
+
+  padding:
+  14px 28px;
+
+  border-radius:
+  999px;
+
+  text-decoration:
+  none;
+
+  color:
+  white;
+
+  background:
+  rgba(255,255,255,0.08);
+
+  border:
+  1px solid rgba(255,255,255,0.1);
+
+  transition:
+  0.3s;
+
+}
+
+/* Hover */
+.social-btn:hover {
+
+  transform:
+  translateY(-5px);
+
+  background:
+  linear-gradient(
+    to right,
+    #8b5cf6,
+    #ec4899
+  );
+
+}
+
+/* Copy */
+.footer-copy {
+
+  margin-top:
+  50px;
+
+  color:
+  #6b7280;
+
+  font-size:
+  15px;
+
+}
+
+/* Creator */
+.creator-text {
+
+  margin-top:
+  35px;
+
+  color:
+  #9ca3af;
+
+  font-size:
+  18px;
+
+}
+
+/* Name */
+.creator-text span {
+
+  background:
+  linear-gradient(
+    to right,
+    #8b5cf6,
+    #ec4899
+  );
+
+  -webkit-background-clip:
+  text;
+
+  background-clip:
+  text;
+
+  -webkit-text-fill-color:
+  transparent;
+
+  font-weight:
+  700;
+
+}
+
+/* =========================
+   MOBILE NAVBAR
+========================= */
+
+@media(max-width:768px) {
+
+  .navbar {
+
+    padding:
+    15px 18px;
+
+  }
+
+  .navbar-logo {
+
+    font-size:
+    24px;
+
+  }
+
+  .navbar-links {
+
+    display: none;
+
+  }
+
+  .menu-btn {
+
+    display: block;
+
+  }
+
+  .mobile-menu {
+
+    width: 100%;
+
+    padding:
+    100px 30px;
+
+    align-items:
+    center;
+
+    text-align:
+    center;
+
+  }
+
+  .mobile-menu a,
+  .mobile-menu button {
+
+    font-size:
+    22px;
+
+  }
+
+  .mobile-user-box {
+
+    margin-top:
+    30px;
+
+  }
+
+  .mobile-user-pic {
+
+    width: 90px;
+
+    height: 90px;
+
+  }
+
+}
