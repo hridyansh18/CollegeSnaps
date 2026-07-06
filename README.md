@@ -109,7 +109,7 @@ Contributions, suggestions, and improvements are always welcome.
 **Hridyansh Chaudhary**
 
 * GitHub: https://github.com/hridyansh18
-* Portfolio: https://hridyansh-portfolio-phi.vercel.app/
+* Portfolio: https://hridyansh.netlify.app/
 * LinkedIn: https://www.linkedin.com/in/hridyanshchaudhary18/
 
 ---
