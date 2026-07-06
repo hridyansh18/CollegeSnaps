@@ -24,42 +24,90 @@ export default function Gallery() {
     setSelectedImage] =
     useState(null);
 
-  /* Load Photos */
   useEffect(() => {
 
-    const photosRef =
-      ref(database, "photos");
+    const albumsRef =
+      ref(database, "albums");
 
     onValue(
 
-      photosRef,
+      albumsRef,
 
       (snapshot) => {
 
         const data =
           snapshot.val();
 
-        if (data) {
+        if (!data) {
 
-          const loadedPhotos =
+          setPhotos([]);
 
-            Object.entries(data)
-            .map(
-
-              ([id, value]) => ({
-
-                id,
-                ...value
-
-              })
-
-            );
-
-          setPhotos(
-            loadedPhotos.reverse()
-          );
+          return;
 
         }
+
+        let allPhotos = [];
+
+        /* ALL ALBUMS */
+        Object.values(data)
+        .forEach(
+
+          (album) => {
+
+            if (
+              album.photos
+            ) {
+
+              /* ALL PHOTOS */
+              Object.values(
+                album.photos
+              )
+              .forEach(
+
+                (photo) => {
+
+                  if (
+                    photo &&
+                    photo.image
+                  ) {
+
+                    allPhotos.push({
+
+                      image:
+                      photo.image,
+
+                      createdAt:
+                      Number(
+                        photo.createdAt
+                      ) || 0
+
+                    });
+
+                  }
+
+                }
+
+              );
+
+            }
+
+          }
+
+        );
+
+        /* NEWEST FIRST */
+        allPhotos.sort(
+
+          (a, b) =>
+
+            b.createdAt -
+            a.createdAt
+
+        );
+
+        setPhotos(
+          [...allPhotos]
+        );
 
       }
 
@@ -69,47 +117,94 @@ export default function Gallery() {
 
   return (
 
-    <div
+    <section
+      className="
+      gallery-section
+      "
       id="gallery"
-
-      className="gallery"
     >
 
-      {/* Title */}
-      <h1 className="gallery-title">
+      {/* Heading */}
+      <div className="
+      gallery-heading
+      ">
 
-        Featured Memories 
+        <h1 className="
+        gallery-title
+        ">
 
-      </h1>
+          Gallery
+
+        </h1>
+
+        <p className="
+        gallery-subtitle
+        ">
+
+          Recent Uploads
+
+        </p>
+
+      </div>
 
       {/* Slider */}
-      <div className="gallery-slider">
+      <div className="
+      gallery-slider
+      ">
 
         {
 
           photos.map(
 
-            (photo) => (
+            (photo, index) => (
 
-              <img
+              <div
 
-                key={photo.id}
+                key={index}
 
-                src={photo.image}
-
-                alt="memory"
+                className="
+                gallery-card
+                "
 
                 onClick={() =>
-
                   setSelectedImage(
                     photo.image
                   )
-
                 }
 
-                className="gallery-image"
+              >
 
-              />
+                <img
+
+                  loading="lazy"
+
+                  src={
+
+                    photo.image?.includes(
+                      "cloudinary"
+                    )
+
+                    ?
+
+                    photo.image.replace(
+
+                      "/upload/",
+
+                      "/upload/f_auto,q_auto/"
+
+                    )
+
+                    :
+
+                    photo.image
+
+                  }
+
+                  alt="gallery"
+
+                />
+
+              </div>
 
             )
 
@@ -126,7 +221,9 @@ export default function Gallery() {
 
           <div
 
-            className="fullscreen"
+            className="
+            fullscreen
+            "
 
             onClick={() =>
               setSelectedImage(
@@ -138,11 +235,33 @@ export default function Gallery() {
 
             <img
 
-              src={selectedImage}
+              src={
+
+                selectedImage?.includes(
+                  "cloudinary"
+                )
+
+                ?
+
+                selectedImage.replace(
+
+                  "/upload/",
+
+                  "/upload/f_auto,q_auto/"
+
+                )
+
+                :
+
+                selectedImage
+
+              }
 
               alt="fullscreen"
 
-              className="fullscreen-image"
+              className="
+              fullscreen-image
+              "
 
             />
 
@@ -152,7 +271,7 @@ export default function Gallery() {
 
       }
 
-    </div>
+    </section>
 
   );
 

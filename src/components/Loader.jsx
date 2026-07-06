@@ -1,39 +1,24 @@
 import "./Loader.css";
 
 export default function Loader() {
-
   return (
+    <div className="loader-page">
+      <div className="loader-box">
 
-    <div className="loader-container">
+        <h1 className="loader-title">
+          <span className="gold">S</span>
+          <span className="gold">C</span>ollege
+          <span className="gold">S</span>naps
+          <span className="gold">IT</span>
+        </h1>
 
-      {/* Glow */}
-      <div className="loader-glow"></div>
+        <p className="loader-text">
+          📸 Loading your memories...
+        </p>
 
-      {/* Spinner */}
-      <div className="loader-circle"></div>
+        <div className="loader-ring"></div>
 
-      {/* Text */}
-      <h1 className="loader-text">
-
-        CollegeSnaps
-
-        <span>
-
-          📸
-
-        </span>
-
-      </h1>
-
-      {/* Subtitle */}
-      <p className="loader-subtext">
-
-        Loading your memories...
-
-      </p>
-
+      </div>
     </div>
-
   );
-
 }

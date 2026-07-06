@@ -1,101 +1,145 @@
+import { useState, useEffect } from "react";
+import "./Login.css";
+
 import {
   signInWithPopup,
   GoogleAuthProvider
 } from "firebase/auth";
 
 import {
-  auth
+  ref,
+  set
+} from "firebase/database";
+
+import {
+  auth,
+  database
 } from "../firebase";
 
 import {
   useNavigate
 } from "react-router-dom";
 
-import "./Login.css";
-
 export default function Login() {
 
-  const navigate =
-    useNavigate();
+  const navigate = useNavigate();
 
-  const provider =
-    new GoogleAuthProvider();
+  const provider = new GoogleAuthProvider();
 
-  /* Google Login */
-  const handleGoogleLogin =
-    async () => {
+  const [loading, setLoading] = useState(false);
 
-      try {
+  useEffect(() => {
 
-        await signInWithPopup(
-          auth,
-          provider
-        );
+    document.title = "CollegeSnaps | Login";
 
-        navigate("/");
+  }, []);
 
-      }
+  /* ==========================
+      GOOGLE LOGIN
+  ========================== */
 
-      catch (error) {
+  const loginWithGoogle = async () => {
 
-        console.log(error);
+    if (loading) return;
 
-      }
+    setLoading(true);
 
-    };
+    try {
+
+      const result = await signInWithPopup(
+        auth,
+        provider
+      );
+
+      const user = result.user;
+
+      await set(
+
+        ref(database, `users/${user.uid}`),
+
+        {
+
+          name: user.displayName,
+
+          email: user.email,
+
+          photo: user.photoURL,
+
+          joinedAt: Date.now()
+
+        }
+
+      );
+
+      navigate("/");
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      alert("Google Login Failed!");
+
+    }
+
+    finally {
+
+      setLoading(false);
+
+    }
+
+  };
 
   return (
 
     <div className="login-page">
 
-      {/* Card */}
       <div className="login-card">
 
-        {/* Title */}
-<h1 className="login-title">
+        <h1 className="login-title">
 
-  <span className="welcome-text">
+          <span className="welcome-text">
 
-    Welcome
+            Welcome
 
-  </span>
+          </span>
 
-  {" "}
+          <br />
 
-  <span className="college-text">
+          <span className="college-text">
 
-    CollegeSnaps
+            CollegeSnaps
 
-  </span>
+          </span>
 
-  <span className="camera-icon">
+        </h1>
 
-    📸
-
-  </span>
-
-</h1>
-
-        {/* Text */}
         <p className="login-text">
 
-          Login to continue
-          your memory journey ✨
+          Login with your Google account and start creating beautiful college memories. ✨
 
         </p>
 
-        {/* Button */}
         <button
-
-          onClick={
-            handleGoogleLogin
-          }
 
           className="google-btn"
 
+          onClick={loginWithGoogle}
+
+          disabled={loading}
+
         >
 
-          Continue with Google
+          {
+
+            loading
+
+              ? "Signing In..."
+
+              : "Continue with Google"
+
+          }
 
         </button>
 

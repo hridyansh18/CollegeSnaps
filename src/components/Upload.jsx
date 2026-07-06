@@ -92,7 +92,7 @@ export default function Upload() {
 
       >
 
-        Upload Memory 
+        Upload Memories 
 
       </button>
 

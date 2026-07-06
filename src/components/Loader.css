@@ -1,214 +1,339 @@
-.loader-container {
+/* =====================================
+   LOADER PAGE
+===================================== */
 
-  position: fixed;
+.loader-page{
+    position:fixed;
+    inset:0;
 
-  inset: 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-  display: flex;
+    background:linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #111827
+    );
 
-  flex-direction: column;
+    overflow:hidden;
 
-  align-items: center;
+    z-index:99999;
+}
 
-  justify-content: center;
+/* =====================================
+   BACKGROUND GLOW
+===================================== */
 
-  overflow: hidden;
+.loader-page::before{
 
-  background:
-  linear-gradient(
-    to bottom,
-    #000000,
-    #050816,
-    #0f172a
-  );
+    content:"";
 
-  z-index: 999;
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(139,92,246,.28),
+    transparent 70%);
+
+    animation:pulse 4s ease infinite;
+}
+
+.loader-page::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(236,72,153,.22),
+    transparent 70%);
+
+    bottom:-120px;
+    right:-80px;
+
+    animation:pulse2 5s ease infinite;
+}
+
+/* =====================================
+   BOX
+===================================== */
+
+.loader-box{
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:2;
+
+    animation:fadeUp .8s ease;
+}
+
+/* =====================================
+   TITLE
+===================================== */
+
+.loader-title{
+
+    font-size:clamp(2.4rem,7vw,4.8rem);
+
+    font-weight:900;
+
+    letter-spacing:-1px;
+
+    background:linear-gradient(
+        90deg,
+        #ffffff,
+        #c084fc,
+        #ec4899
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    margin-bottom:18px;
+}
+
+/* Gold Letters */
+
+.gold{
+
+    color:#fabc00;
+
+    -webkit-text-fill-color:#fabc00;
+}
+
+/* =====================================
+   TEXT
+===================================== */
+
+.loader-text{
+
+    color:#9ca3af;
+
+    font-size:18px;
+
+    letter-spacing:.5px;
+
+    margin-bottom:38px;
+
+    animation:blink 2s infinite;
+}
+
+/* =====================================
+   RING
+===================================== */
+
+.loader-ring{
+
+    width:72px;
+    height:72px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:4px solid rgba(255,255,255,.12);
+
+    border-top:4px solid #8b5cf6;
+    border-right:4px solid #ec4899;
+
+    animation:spin .8s linear infinite;
+
+    position:relative;
+}
+
+.loader-ring::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:8px;
+
+    border-radius:50%;
+
+    border:3px solid transparent;
+
+    border-bottom:3px solid #fabc00;
+
+    animation:spinReverse 1.2s linear infinite;
+}
+
+/* =====================================
+   ANIMATIONS
+===================================== */
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
 
 }
 
-/* Glow */
-.loader-glow {
+@keyframes spinReverse{
 
-  position: absolute;
+    to{
 
-  width: 350px;
+        transform:rotate(-360deg);
 
-  height: 350px;
-
-  border-radius: 50%;
-
-  background:
-  radial-gradient(
-    circle,
-    rgba(139,92,246,0.35),
-    transparent
-  );
-
-  filter:
-  blur(60px);
-
-  animation:
-  pulse 2s infinite ease-in-out;
+    }
 
 }
 
-/* Spinner */
-.loader-circle {
+@keyframes fadeUp{
 
-  width: 100px;
+    from{
 
-  height: 100px;
+        opacity:0;
 
-  border-radius: 50%;
+        transform:translateY(20px);
 
-  border:
-  6px solid rgba(255,255,255,0.1);
+    }
 
-  border-top:
-  6px solid #8b5cf6;
+    to{
 
-  border-right:
-  6px solid #ec4899;
+        opacity:1;
 
-  animation:
-  spin 1s linear infinite;
+        transform:translateY(0);
 
-  z-index: 2;
+    }
 
 }
 
-/* Text */
-.loader-text {
+@keyframes pulse{
 
-  margin-top: 35px;
+    0%{
 
-  font-size: 54px;
+        transform:scale(1);
 
-  font-weight: 900;
+        opacity:.5;
 
-  color: white;
+    }
 
-  z-index: 2;
+    50%{
 
-}
+        transform:scale(1.3);
 
-/* Gradient Text */
-.loader-text {
+        opacity:1;
 
-  background:
-  linear-gradient(
-    to right,
-    #8b5cf6,
-    #ec4899
-  );
+    }
 
-  -webkit-background-clip:
-  text;
+    100%{
 
-  background-clip:
-  text;
+        transform:scale(1);
 
-  -webkit-text-fill-color:
-  transparent;
+        opacity:.5;
+
+    }
 
 }
 
-/* Camera */
-.loader-text span {
+@keyframes pulse2{
 
-  -webkit-text-fill-color:
-  white;
+    0%{
 
-}
+        transform:scale(1);
 
-/* Subtitle */
-.loader-subtext {
+    }
 
-  margin-top: 12px;
+    50%{
 
-  color:
-  #9ca3af;
+        transform:scale(1.2);
 
-  font-size:
-  18px;
+    }
 
-  z-index: 2;
+    100%{
 
-  animation:
-  fade 2s infinite;
+        transform:scale(1);
+
+    }
 
 }
 
-/* Spinner Animation */
-@keyframes spin {
+@keyframes blink{
 
-  0% {
+    0%,100%{
 
-    transform:
-    rotate(0deg);
+        opacity:1;
 
-  }
+    }
 
-  100% {
+    50%{
 
-    transform:
-    rotate(360deg);
+        opacity:.55;
 
-  }
+    }
 
 }
 
-/* Glow Animation */
-@keyframes pulse {
+/* =====================================
+   TABLET
+===================================== */
 
-  0% {
+@media(max-width:768px){
 
-    transform:
-    scale(1);
+    .loader-title{
 
-    opacity: 0.7;
+        font-size:3rem;
 
-  }
+    }
 
-  50% {
+    .loader-text{
 
-    transform:
-    scale(1.15);
+        font-size:16px;
 
-    opacity: 1;
+    }
 
-  }
+    .loader-ring{
 
-  100% {
-
-    transform:
-    scale(1);
-
-    opacity: 0.7;
-
-  }
+        width:65px;
+        height:65px;
+    }
 
 }
 
-/* Fade */
-@keyframes fade {
+/* =====================================
+   MOBILE
+===================================== */
 
-  0% {
+@media(max-width:480px){
 
-    opacity: 0.5;
+    .loader-title{
 
-  }
+        font-size:2.3rem;
 
-  50% {
+    }
 
-    opacity: 1;
+    .loader-text{
 
-  }
+        font-size:15px;
 
-  100% {
+    }
 
-    opacity: 0.5;
+    .loader-ring{
 
-  }
+        width:58px;
+        height:58px;
+
+        border-width:3px;
+    }
 
 }

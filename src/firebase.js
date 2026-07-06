@@ -1,43 +1,64 @@
-import { initializeApp }
-from "firebase/app";
+import {
+  initializeApp
+} from "firebase/app";
 
-import { getAuth }
-from "firebase/auth";
+import {
+  getAuth
+} from "firebase/auth";
 
 import {
   getDatabase
 } from "firebase/database";
 
+import {
+  getStorage
+} from "firebase/storage";
+
+/* Firebase Config */
 const firebaseConfig = {
 
   apiKey:
-    "AIzaSyCYiIaFnVpZHkjqcV_DgHEb1-PLWEPOyJI",
+  import.meta.env
+  .VITE_FIREBASE_API_KEY,
 
   authDomain:
-    "collegesnaps-73a45.firebaseapp.com",
+  import.meta.env
+  .VITE_AUTH_DOMAIN,
 
   databaseURL:
-    "https://collegesnaps-73a45-default-rtdb.asia-southeast1.firebasedatabase.app",
+  import.meta.env
+  .VITE_DATABASE_URL,
 
   projectId:
-    "collegesnaps-73a45",
+  import.meta.env
+  .VITE_PROJECT_ID,
 
   storageBucket:
-    "collegesnaps-73a45.firebasestorage.app",
+  import.meta.env
+  .VITE_STORAGE_BUCKET,
 
   messagingSenderId:
-    "120585805165",
+  import.meta.env
+  .VITE_MESSAGING_SENDER_ID,
 
   appId:
-    "1:120585805165:web:75981172d4f2fbc68e4e64"
+  import.meta.env
+  .VITE_APP_ID
 
 };
 
+/* Initialize */
 const app =
-  initializeApp(firebaseConfig);
+  initializeApp(
+    firebaseConfig
+  );
 
+/* Services */
 export const auth =
   getAuth(app);
 
 export const database =
   getDatabase(app);
+
+export const storage =
+  getStorage(app);

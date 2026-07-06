@@ -1,73 +1,34 @@
 import "./Hero.css";
 
 export default function Hero() {
-
   return (
+    <section className="hero">
+      <div className="hero-content">
+        <p className="hero-tag">
+          📸 Your Digital College Memory Album
+        </p>
 
-    <div className="hero">
+        <h1 className="hero-title">
+          Capture Every <br />
+          College Moment <br />
+          Forever
+        </h1>
 
-      {/* Badge */}
-      <div className="hero-badge">
+        <p className="hero-desc">
+          Upload photos, create albums, and relive your unforgettable
+          college memories anytime, anywhere. ✨
+        </p>
 
-        ✨ Your Digital Memory Album
+        <div className="hero-buttons">
+          <a href="/albums" className="hero-btn">
+            📂 Open Albums
+          </a>
 
+          <a href="#gallery" className="hero-btn-outline">
+            🖼️ Explore Gallery
+          </a>
+        </div>
       </div>
-
-      {/* Heading */}
-      <h1 className="hero-title">
-
-        Capture Every
-
-        <span>
-
-          {" "}College Moment{" "}
-
-        </span>
-
-        Forever 📸
-
-      </h1>
-
-      {/* Description */}
-      <p className="hero-desc">
-
-        Upload memories,
-        relive events,
-        and keep your college
-        life alive forever ✨
-
-      </p>
-
-      {/* Buttons */}
-      <div className="hero-buttons">
-
-        <a
-          href="#gallery"
-
-          className="hero-btn"
-
-        >
-
-          Explore Gallery
-
-        </a>
-
-        <a
-          href="/album"
-
-          className="hero-btn-outline"
-
-        >
-
-          Open Album
-
-        </a>
-
-      </div>
-
-    </div>
-
+    </section>
   );
-
 }
-

@@ -1,279 +1,299 @@
-import {
-  useEffect,
-  useState
-} from "react";
-
-import {
-  ref,
-  onValue,
-  remove
-} from "firebase/database";
-
-import {
-  auth,
-  database
-} from "../firebase";
-
+import { useState, useEffect } from "react";
+import { ref, push, onValue, remove } from "firebase/database";
+import { auth, database } from "../firebase";
+import { useNavigate } from "react-router-dom";
 import "./Album.css";
 
-export default function Album() {
+export default function Albums() {
 
-  const [photos,
-    setPhotos] =
-    useState([]);
+  const navigate = useNavigate();
 
-  const [selectedImage,
-    setSelectedImage] =
-    useState(null);
+  const [title, setTitle] = useState("");
+  const [albums, setAlbums] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  /* Admin Email */
-  const adminEmail =
-  "hridyanshchaudhary18@gmail.com";
+  /* CHANGE THIS */
+  const adminEmail = "YOUR_ADMIN_EMAIL@gmail.com";
 
-  /* Load Photos */
+  const defaultCover =
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1000&q=80";
+
+  /* ===============================
+        CREATE ALBUM
+  =============================== */
+
+  const createAlbum = async () => {
+
+    const albumTitle = title.trim();
+
+    if (!albumTitle) {
+      alert("Please enter album name.");
+      return;
+    }
+
+    await push(ref(database, "albums"), {
+
+      title: albumTitle,
+
+      userName:
+        auth.currentUser?.displayName || "Unknown",
+
+      userId:
+        auth.currentUser?.uid,
+
+      createdAt:
+        Date.now(),
+
+      coverImage:
+        defaultCover,
+
+      photos: {}
+
+    });
+
+    setTitle("");
+
+  };
+
+  /* Enter Key */
+
+  const handleKeyDown = (e) => {
+
+    if (e.key === "Enter") {
+
+      createAlbum();
+
+    }
+
+  };
+
+  /* ===============================
+          DELETE
+  =============================== */
+
+  const deleteAlbum = async (id) => {
+
+    const confirmDelete = window.confirm(
+      "Delete this album?"
+    );
+
+    if (!confirmDelete) return;
+
+    await remove(ref(database, `albums/${id}`));
+
+  };
+
+  /* ===============================
+          LOAD
+  =============================== */
+
   useEffect(() => {
 
-    const photosRef =
-      ref(database, "photos");
+    const albumsRef = ref(database, "albums");
 
-    onValue(
+    const unsubscribe = onValue(albumsRef, (snapshot) => {
 
-      photosRef,
+      const data = snapshot.val();
 
-      (snapshot) => {
+      if (!data) {
 
-        const data =
-          snapshot.val();
-
-        if (data) {
-
-          const loadedPhotos =
-
-            Object.entries(data)
-            .map(
-
-              ([id, value]) => ({
-
-                id,
-                ...value
-
-              })
-
-            );
-
-          setPhotos(
-            loadedPhotos.reverse()
-          );
-
-        }
+        setAlbums([]);
+        setLoading(false);
+        return;
 
       }
 
-    );
+      const loadedAlbums = Object.entries(data).map(
+        ([id, value]) => ({
+
+          id,
+
+          ...value
+
+        })
+      );
+
+      loadedAlbums.sort(
+        (a, b) =>
+          (b.createdAt || 0) -
+          (a.createdAt || 0)
+      );
+
+      setAlbums(loadedAlbums);
+
+      setLoading(false);
+
+    });
+
+    return () => unsubscribe();
 
   }, []);
 
-  /* Delete */
-  const deletePhoto =
-    (id) => {
-
-      remove(
-
-        ref(
-          database,
-          `photos/${id}`
-        )
-
-      );
-
-    };
-
-  /* Download */
-  const downloadPhoto =
-    async (
-      image,
-      id
-    ) => {
-
-      const response =
-        await fetch(image);
-
-      const blob =
-        await response.blob();
-
-      const url =
-        window.URL
-        .createObjectURL(blob);
-
-      const link =
-        document.createElement(
-          "a"
-        );
-
-      link.href = url;
-
-      link.download =
-        `memory-${id}.jpg`;
-
-      document.body
-      .appendChild(link);
-
-      link.click();
-
-      document.body
-      .removeChild(link);
-
-      window.URL
-      .revokeObjectURL(url);
-
-    };
-
   return (
 
-    <div className="album-page">
+    <div className="albums-page">
 
-      {/* Title */}
-      <h1 className="album-title">
+      {/* TITLE */}
 
-        Memory Album 
+      <h1 className="albums-title">
+
+        📂 Album Memories
 
       </h1>
 
-      {/* Grid */}
-      <div className="album-grid">
+      {/* CREATE */}
 
-        {
+      <div className="create-album">
 
-          photos.map(
+        <input
 
-            (photo) => (
+          type="text"
 
-              <div
+          placeholder="Create new album..."
 
-                key={photo.id}
+          value={title}
 
-                className="album-card"
+          onChange={(e) =>
+            setTitle(e.target.value)
+          }
 
-              >
+          onKeyDown={handleKeyDown}
 
-                {/* Image */}
-                <img
+          maxLength={40}
 
-                  src={photo.image}
+        />
 
-                  alt="memory"
+        <button onClick={createAlbum}>
 
-                  className="album-image"
+          Create
 
-                  onClick={() =>
-                    setSelectedImage(
-                      photo.image
-                    )
-                  }
-
-                />
-
-                {/* Icons */}
-                <div className="album-actions">
-
-                  {/* Download */}
-                  <button
-
-                    onClick={() =>
-                      downloadPhoto(
-                        photo.image,
-                        photo.id
-                      )
-                    }
-
-                    className="download-btn"
-
-                  >
-
-                    ⬇
-
-                  </button>
-
-                  {/* Delete */}
-
-                  {
-
-                    (
-
-                      auth.currentUser?.email ===
-                      adminEmail
-
-                    ||
-
-                      auth.currentUser?.uid ===
-                      photo.userId
-
-                    ) && (
-
-                      <button
-
-                        onClick={() =>
-                          deletePhoto(
-                            photo.id
-                          )
-                        }
-
-                        className="delete-btn"
-
-                      >
-
-                        🗑
-
-                      </button>
-
-                    )
-
-                  }
-
-                </div>
-
-              </div>
-
-            )
-
-          )
-
-        }
+        </button>
 
       </div>
 
-      {/* Fullscreen */}
-      {
+      {/* LOADING */}
 
-        selectedImage && (
+      {loading && (
 
-          <div
+        <div className="album-empty">
 
-            className="fullscreen"
+          Loading albums...
 
-            onClick={() =>
-              setSelectedImage(
-                null
-              )
-            }
+        </div>
 
-          >
+      )}
 
-            <img
+      {/* EMPTY */}
 
-              src={selectedImage}
+      {!loading && albums.length === 0 && (
 
-              alt="fullscreen"
+        <div className="album-empty">
 
-              className="fullscreen-image"
+          📂 No albums found
 
-            />
+        </div>
 
-          </div>
+      )}
 
-        )
+      {/* GRID */}
 
-      }
+      <div className="albums-grid">
+
+        {albums.map((album) => {
+
+          const photoCount = album.photos
+            ? Object.keys(album.photos).length
+            : 0;
+
+          const cover = album.coverImage
+            ? album.coverImage.includes("cloudinary")
+              ? album.coverImage.replace(
+                  "/upload/",
+                  "/upload/f_auto,q_auto/"
+                )
+              : album.coverImage
+            : defaultCover;
+
+          return (
+
+            <div
+              key={album.id}
+              className="album-folder"
+            >
+
+              {/* COVER */}
+
+              <img
+
+                loading="lazy"
+
+                src={cover}
+
+                alt={album.title}
+
+                onClick={() =>
+                  navigate(`/album/${album.id}`)
+                }
+
+              />
+
+              {/* INFO */}
+
+              <div className="album-info">
+
+                <h2>
+
+                  {album.title}
+
+                </h2>
+
+                <p>
+
+                  {album.createdAt
+                    ? new Date(
+                        album.createdAt
+                      ).toLocaleDateString()
+                    : "-"}
+
+                </p>
+
+                <span>
+
+                  📸 {photoCount} Photos
+
+                </span>
+
+              </div>
+
+              {/* DELETE */}
+
+              {(auth.currentUser?.email === adminEmail ||
+
+                auth.currentUser?.uid === album.userId) && (
+
+                <button
+
+                  className="album-delete"
+
+                  onClick={() =>
+                    deleteAlbum(album.id)
+                  }
+
+                >
+
+                  ✕
+
+                </button>
+
+              )}
+
+            </div>
+
+          );
+
+        })}
+
+      </div>
 
     </div>
 

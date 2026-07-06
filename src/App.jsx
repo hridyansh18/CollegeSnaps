@@ -4,19 +4,55 @@ import {
   Route
 } from "react-router-dom";
 
+import {
+  useEffect,
+  useState
+} from "react";
+
 import Home
 from "./pages/Home";
 
 import Login
 from "./pages/Login";
 
-import Album
+import Albums
 from "./pages/Album";
+
+import AlbumDetails
+from "./pages/AlbumDetails";
+
+import Loader
+from "./components/Loader";
 
 import ProtectedRoute
 from "./components/ProtectedRoute";
 
 export default function App() {
+
+  const [loading,
+    setLoading] =
+    useState(true);
+
+  useEffect(() => {
+
+    const timer =
+      setTimeout(() => {
+
+        setLoading(false);
+
+      }, 2500);
+
+    return () =>
+      clearTimeout(timer);
+
+  }, []);
+
+  /* Loader */
+  if (loading) {
+
+    return <Loader />;
+
+  }
 
   return (
 
@@ -26,11 +62,14 @@ export default function App() {
 
         {/* Login */}
         <Route
+
           path="/login"
+
           element={<Login />}
+
         />
 
-        {/* Protected Home */}
+        {/* Home */}
         <Route
 
           path="/"
@@ -47,16 +86,33 @@ export default function App() {
 
         />
 
-        {/* Protected Album */}
+        {/* Albums */}
         <Route
 
-          path="/album"
+          path="/albums"
 
           element={
 
             <ProtectedRoute>
 
-              <Album />
+              <Albums />
+
+            </ProtectedRoute>
+
+          }
+
+        />
+
+        {/* Album Details */}
+        <Route
+
+          path="/album/:id"
+
+          element={
+
+            <ProtectedRoute>
+
+              <AlbumDetails />
 
             </ProtectedRoute>
 

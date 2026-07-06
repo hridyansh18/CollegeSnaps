@@ -1,274 +1,142 @@
-import {
-  useEffect,
-  useState
-} from "react";
-
-import {
-  useNavigate
-} from "react-router-dom";
-
-import {
-  onAuthStateChanged,
-  signOut
-} from "firebase/auth";
-
-import {
-  auth
-} from "../firebase";
-
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import "./Navbar.css";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const navigate =
-    useNavigate();
-
-  const [menuOpen,
-    setMenuOpen] =
-    useState(false);
-
-  const [user,
-    setUser] =
-    useState(null);
-
+  // Firebase Auth
   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
 
-    const unsubscribe =
-      onAuthStateChanged(
-
-        auth,
-
-        (currentUser) => {
-
-          setUser(
-            currentUser
-          );
-
-        }
-
-      );
-
-    return () =>
-      unsubscribe();
-
+    return unsubscribe;
   }, []);
 
-  const handleLogout =
-    async () => {
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
 
-      await signOut(auth);
-
-      navigate("/login");
-
+    return () => {
+      document.body.style.overflow = "auto";
     };
+  }, [menuOpen]);
+
+  // Logout
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setMenuOpen(false);
+      window.location.href = "/";
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-
     <>
-
       {/* Navbar */}
       <nav className="navbar">
-
         {/* Logo */}
-        <h1 className="navbar-logo">
+        <a href="/" className="navbar-logo">
+          <span className="logo-highlight">S</span>
+          <span className="logo-highlight">C</span>
+          ollege
+          <span className="logo-highlight">S</span>
+          naps
+          <span className="logo-highlight">IT</span>
+        </a>
 
-          CollegeSnaps 📸
-
-        </h1>
-
-        {/* Desktop */}
+        {/* Desktop Links */}
         <div className="navbar-links">
+          <a href="/">Home</a>
 
-          <a
-            href="#gallery"
+          <a href="/albums">Albums</a>
 
-            className="explore-btn"
-          >
-
-            Explore
-
-          </a>
-
-          {
-
-            user && (
-
-              <div className="user-box">
-
-                {/* Profile */}
-                <img
-
-                  src={
-                    user.photoURL
-                  }
-
-                  alt="profile"
-
-                  className="user-pic"
-
-                />
-
-                {/* Info */}
-                <div className="user-info">
-
-                  <h4>
-
-                    {user.displayName}
-
-                  </h4>
-
-                  <p>
-
-                    {user.email}
-
-                  </p>
-
-                </div>
-
-              </div>
-
-            )
-
-          }
-
-          {
-
-            user ? (
-
-              <button
-
-                onClick={
-                  handleLogout
-                }
-
-                className="logout-btn"
-
-              >
-
-                Logout
-
-              </button>
-
-            ) : (
-
-              <a
-                href="/login"
-
-                className="login-btn"
-              >
-
-                Login
-
-              </a>
-
-            )
-
-          }
-
+          {user ? (
+            <button
+              className="logout-btn"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          ) : (
+            <a href="/login">Login</a>
+          )}
         </div>
 
-        {/* Mobile */}
+        {/* Mobile Menu Button */}
         <button
-
           className="menu-btn"
-
-          onClick={() =>
-            setMenuOpen(
-              !menuOpen
-            )
-          }
-
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menu"
         >
-
-          ☰
-
+          {menuOpen ? "✕" : "☰"}
         </button>
-
       </nav>
 
+      {/* Overlay */}
+      <div
+        className={`menu-overlay ${
+          menuOpen ? "show-overlay" : ""
+        }`}
+        onClick={() => setMenuOpen(false)}
+      />
+
       {/* Mobile Menu */}
-      {
+      <div
+        className={`mobile-menu ${
+          menuOpen ? "show-menu" : ""
+        }`}
+      >
+        {user && (
+          <div className="mobile-user">
+            <img
+              src={
+                user.photoURL ||
+                "https://ui-avatars.com/api/?name=User&background=8b5cf6&color=fff"
+              }
+              alt="User"
+            />
 
-        menuOpen && (
+            <h3>
+              {user.displayName || "User"}
+            </h3>
 
-          <div className="mobile-menu">
-
-            <a href="#gallery">
-
-              Gallery
-
-            </a>
-
-            {
-
-              user && (
-
-                <div className="mobile-user-box">
-
-                  <img
-
-                    src={
-                      user.photoURL
-                    }
-
-                    alt="profile"
-
-                    className="mobile-user-pic"
-
-                  />
-
-                  <h4>
-
-                    {user.displayName}
-
-                  </h4>
-
-                  <p>
-
-                    {user.email}
-
-                  </p>
-
-                </div>
-
-              )
-
-            }
-
-            {
-
-              user ? (
-
-                <button
-                  onClick={
-                    handleLogout
-                  }
-                >
-
-                  Logout
-
-                </button>
-
-              ) : (
-
-                <a href="/login">
-
-                  Login
-
-                </a>
-
-              )
-
-            }
-
+            <p>{user.email}</p>
           </div>
+        )}
 
-        )
+        <a
+          href="/"
+          onClick={() => setMenuOpen(false)}
+        >
+          🏠 Home
+        </a>
 
-      }
+        <a
+          href="/albums"
+          onClick={() => setMenuOpen(false)}
+        >
+          📸 Albums
+        </a>
 
+        {user ? (
+          <button onClick={logout}>
+            🚪 Logout
+          </button>
+        ) : (
+          <a
+            href="/login"
+            onClick={() => setMenuOpen(false)}
+          >
+            🔑 Login
+          </a>
+        )}
+      </div>
     </>
-
   );
-
 }

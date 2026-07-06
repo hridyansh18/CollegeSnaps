@@ -1,167 +1,150 @@
-import {
-  useEffect,
-  useState
-} from "react";
-
-import {
-  ref,
-  onValue
-} from "firebase/database";
-
-import {
-  database
-} from "../firebase";
-
+import { useEffect, useState } from "react";
+import { ref, onValue } from "firebase/database";
+import { database } from "../firebase";
 import "./Stats.css";
 
 export default function Stats() {
 
-  const [photoCount,
-    setPhotoCount] =
-    useState(0);
-
-  const [userCount,
-    setUserCount] =
-    useState(0);
+  const [photoCount, setPhotoCount] = useState(0);
+  const [userCount, setUserCount] = useState(0);
 
   /* Website Launch Date */
-  const launchDate =
-    new Date("2026-05-20");
+  const launchDate = new Date("2026-05-20");
+  const currentDate = new Date();
 
-  const currentDate =
-    new Date();
+  let years =
+    currentDate.getFullYear() -
+    launchDate.getFullYear();
 
-  const diffTime =
-    Math.abs(
-      currentDate -
-      launchDate
+  let months =
+    currentDate.getMonth() -
+    launchDate.getMonth();
+
+  let days =
+    currentDate.getDate() -
+    launchDate.getDate();
+
+  if (days < 0) {
+    months--;
+
+    const previousMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      0
     );
 
-  const daysRunning =
-    Math.ceil(
+    days += previousMonth.getDate();
+  }
 
-      diffTime /
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
 
-      (1000 * 60 * 60 * 24)
+  let runningTime = "";
 
-    );
+  if (years > 0)
+    runningTime += `${years}Y `;
+
+  if (months > 0)
+    runningTime += `${months}M `;
+
+  runningTime += `${days}D`;
 
   useEffect(() => {
 
-    /* Photos Count */
-    const photosRef =
-      ref(database, "photos");
+    /* Albums */
+    const albumsRef = ref(database, "albums");
 
-    onValue(
-
-      photosRef,
-
+    const unsubscribeAlbums = onValue(
+      albumsRef,
       (snapshot) => {
 
-        const data =
-          snapshot.val();
+        const data = snapshot.val();
 
-        if (data) {
-
-          setPhotoCount(
-
-            Object.keys(data)
-            .length
-
-          );
-
+        if (!data) {
+          setPhotoCount(0);
+          return;
         }
 
-      }
+        let totalPhotos = 0;
 
+        Object.values(data).forEach((album) => {
+
+          if (album.photos) {
+
+            totalPhotos += Object.values(album.photos)
+              .filter(
+                (photo) =>
+                  photo &&
+                  photo.image
+              ).length;
+
+          }
+
+        });
+
+        setPhotoCount(totalPhotos);
+
+      }
     );
 
-    /* Users Count */
-    const usersRef =
-      ref(database, "users");
+    /* Users */
+    const usersRef = ref(database, "users");
 
-    onValue(
-
+    const unsubscribeUsers = onValue(
       usersRef,
-
       (snapshot) => {
 
-        const data =
-          snapshot.val();
+        const data = snapshot.val();
 
         if (data) {
-
           setUserCount(
-
-            Object.keys(data)
-            .length
-
+            Object.keys(data).length
           );
-
+        } else {
+          setUserCount(0);
         }
 
       }
-
     );
+
+    return () => {
+      unsubscribeAlbums();
+      unsubscribeUsers();
+    };
 
   }, []);
 
   return (
 
-    <div className="stats-section">
+    <section className="stats-section">
 
-      {/* Photos */}
       <div className="stats-card">
 
-        <h1>
+        <h1>{photoCount}+</h1>
 
-          {photoCount}+
-
-        </h1>
-
-        <p>
-
-          Photos Uploaded 📸
-
-        </p>
+        <p>📸 Photos Uploaded</p>
 
       </div>
 
-      {/* Users */}
       <div className="stats-card">
 
-        <h1>
+        <h1>{userCount}+</h1>
 
-          {userCount}+
-
-        </h1>
-
-        <p>
-
-          Students Joined 👥
-
-        </p>
+        <p>👥 Students Joined</p>
 
       </div>
 
-      {/* Running */}
       <div className="stats-card">
 
-        <h1>
+        <h1>{runningTime}</h1>
 
-          {daysRunning}
-
-        </h1>
-
-        <p>
-
-          Active Since Launch 🚀
-
-        </p>
+        <p>🚀 Active Since</p>
 
       </div>
 
-    </div>
+    </section>
 
   );
 
