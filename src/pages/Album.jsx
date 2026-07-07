@@ -13,7 +13,7 @@ export default function Albums() {
   const [loading, setLoading] = useState(true);
 
   /* CHANGE THIS */
-  const adminEmail = "YOUR_ADMIN_EMAIL@gmail.com";
+  const adminEmail = "hridyanshchaudhary18@gmail.com";
 
   const defaultCover =
     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1000&q=80";
@@ -137,7 +137,7 @@ export default function Albums() {
 
       <h1 className="albums-title">
 
-        📂 Album Memories
+         Album Memories
 
       </h1>
 

@@ -69,7 +69,7 @@ export default function Footer() {
       {/* Copyright */}
       <p className="footer-copy">
 
-        © {currentYear} CollegeSnaps IT.
+        © {currentYear} CollegeSnaps.
         All Rights Reserved.
 
       </p>

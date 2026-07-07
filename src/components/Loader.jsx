@@ -13,7 +13,7 @@ export default function Loader() {
         </h1>
 
         <p className="loader-text">
-          📸 Loading your memories...
+           Loading your memories...
         </p>
 
         <div className="loader-ring"></div>
