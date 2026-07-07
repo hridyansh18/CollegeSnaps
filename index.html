@@ -1,56 +1,115 @@
 <!doctype html>
-
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="UTF-8" />
+  <meta charset="UTF-8" />
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon.png"
-    />
+  <!-- Viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Mobile View -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+  <!-- Theme -->
+  <meta name="theme-color" content="#0f172a" />
 
-    <!-- Theme Color -->
-    <meta
-      name="theme-color"
-      content="#0f172a"
-    />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- SEO -->
-    <meta
-      name="description"
-      content="
-      CollegeSnaps - Capture and share your college memories.
-      "
-    />
+<!-- SEO -->
+<title>CollegeSnaps | SCSIT DAVV Indore College Memory Album</title>
 
-    <!-- Title -->
-    <title>
+<meta
+  name="description"
+  content="CollegeSnaps is a photo album platform for SCSIT DAVV Indore students to capture, organize and share college memories, events, fresher parties, farewell, festivals and campus moments."
+/>
 
-      CollegeSnaps
+<meta
+  name="keywords"
+  content="CollegeSnaps, SCSIT, SCSIT Indore, DAVV, DAVV Indore, School of Computer Science and IT, SCSIT DAVV, MCA SCSIT, BCA SCSIT, College Memories, College Photos, Student Gallery, Campus Events, Fresher Party, Farewell, College Album"
+/>
 
-    </title>
+<meta property="og:title" content="CollegeSnaps | SCSIT DAVV Indore College Memories" />
 
-  </head>
+<meta
+  property="og:description"
+  content="Capture and share unforgettable memories of SCSIT DAVV Indore with CollegeSnaps."
+/>
 
-  <body>
+<meta
+  name="twitter:title"
+  content="CollegeSnaps | SCSIT DAVV Indore College Memories"
+/>
 
-    <div id="root"></div>
+<meta
+  name="twitter:description"
+  content="Capture and share unforgettable memories of SCSIT DAVV Indore with CollegeSnaps."
+/>
 
-    <script
-      type="module"
-      src="/src/main.jsx"
-    ></script>
+  <meta name="author" content="Hridyansh Chaudhary" />
 
-  </body>
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://collegesnaps.netlify.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+
+  <meta property="og:title" content="CollegeSnaps | SCSIT DAVV Indore College Memories" />
+
+  <meta
+    property="og:description"
+    content="Upload photos, create albums, and preserve your college memories forever with CollegeSnaps."
+  />
+
+  <meta property="og:image" content="https://collegesnaps.netlify.app/preview.png" />
+
+  <meta property="og:url" content="https://collegesnaps.netlify.app/" />
+
+  <meta property="og:site_name" content="CollegeSnaps" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="twitter:title" content="CollegeSnaps | Capture & Share College Memories" />
+
+  <meta
+    name="twitter:description"
+    content="Capture your best college moments with CollegeSnaps."
+  />
+
+  <meta name="twitter:image" content="https://collegesnaps.netlify.app/preview.png" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"CollegeSnaps",
+    "url":"https://collegesnaps.netlify.app/",
+    "description":"Capture, organize and share your college memories.",
+    "author":{
+      "@type":"Person",
+      "name":"Hridyansh Chaudhary"
+    }
+  }
+  </script>
+
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.jsx"></script>
+
+</body>
 
 </html>
